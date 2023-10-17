@@ -1,5 +1,7 @@
+# Read to CSV
+
 This Python script is designed to convert a specific type of data file format (.plt) into more usable formats, namely Excel (xlsx) and CSV (csv). It performs data parsing, cleaning, and transformation to ensure that the data is structured correctly for further analysis. This README file provides an overview of the script's functionality, how to use it, and any specific considerations.
-#Table of Contents
+##Table of Contents
 
     Prerequisites
     Usage
@@ -9,7 +11,7 @@ This Python script is designed to convert a specific type of data file format (.
     Running the Script
     Issues and Limitations
 
-##Prerequisites
+## Prerequisites
 
     Python 3.x
     Required Python packages are specified at the beginning of the script and can be installed using pip:
@@ -18,7 +20,7 @@ This Python script is designed to convert a specific type of data file format (.
 pip install pandas openpyxl
 ```
 
-##Usage
+## Usage
 
 This script is intended for users who have data in a .plt file format and need to convert it to a more accessible format. It performs the following steps:
 
@@ -27,23 +29,23 @@ This script is intended for users who have data in a .plt file format and need t
     Cleans and structures the data.
     Writes the data to both Excel (.xlsx) and CSV (.csv) files.
 
-##Input
+## Input
 
     The primary input is the .plt file containing the data you want to convert. You can specify the input file path in the script's input_file variable.
 
-##Output
+## Output
 
     The script generates two output files:
         An Excel file (.xlsx) named based on the input file with columns formatted for readability.
         A CSV file (.csv) with the same data as the Excel file.
 
-##File Structure
+## File Structure
 
     convert_plt_to_excel.py: The Python script for converting .plt files to Excel and CSV.
     test_6.plt: An example .plt file provided for testing the script.
     README.MD: This documentation file.
 
-##Running the Script
+## Running the Script
 
     Ensure that you have installed the required Python packages (pandas and openpyxl).
     Place your .plt file in the same directory as the script.
