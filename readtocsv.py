@@ -6,20 +6,21 @@ Created on Wed Sep 27 11:28:37 2023
 
 @author: kakshay
 """
-
 import pandas as pd
 import openpyxl
 import os
-# Specify the input .plt file and output CSV file paths
-input_plt_file = "x1_hole.plt"
-output_file = os.path.splitext(input_plt_file)[0] + ".xlsx"
 
+#%%
+# Specify the input .plt file and output CSV file paths
+input_file = "test_6.plt"
+excel_output_file = os.path.splitext(input_file)[0] + ".xlsx"
+csv_output_file = os.path.splitext(input_file)[0] + ".csv"
 # Initialize variables to store data
 headers = ["Timestamp(s)"]
 data = []
 
 # Read the .plt file
-with open(input_plt_file, "r") as plt_file:
+with open(input_file, "r") as plt_file:
     parsed_data = plt_file.readlines()
 
 header_data = [] 
@@ -44,11 +45,12 @@ for i, value in enumerate(header_data):
 for value in parsed_data[index:]:
     columns = value.strip().split()  # Split columns based on spaces or tabs  
     data.append(columns)
- #%%   
+#%%
+#TO parse the data vertically with index as TImestamp 
 # Create a DataFrame by transposing the data
 df0 = pd.DataFrame(data).T
 
-# Convert the 'Column1' to numeric
+# Convert to numeric
 df1 = df0.apply(pd.to_numeric, errors='coerce')
 
 # Create a new DataFrame to store the result
@@ -71,18 +73,21 @@ for i in range(num_iterations):
     # Concatenate the chunk with the result DataFrame
     df2 = pd.concat([df2, chunk], axis=0, ignore_index=True)
 
-# Fill NaN values in Timestamp column with previous value
-df2= df2.fillna(method='ffill')
-
 # Assign the specified headers to create df2
 df2 = df2.rename(columns=dict(zip(df1.columns, headers)))
 
+# Fill NaN values in Timestamp column with previous value
+df2= df2.fillna(method='ffill')
+
+# Export the DataFrame to a CSV file
+df2.to_csv(csv_output_file, index=False)
+
 # Write the DataFrame to an Excel file
-df2.to_excel(output_file, index=False)  # Set index=False to exclude the DataFrame index in the output
+df2.to_excel(excel_output_file, index=False)  # Set index=False to exclude the DataFrame index in the output
 
 #%%
 # Load the Excel file to apply the column heading changes
-wb = openpyxl.load_workbook(output_file)
+wb = openpyxl.load_workbook(excel_output_file)
 
 # Iterate through all sheets in the workbook
 for sheet in wb.sheetnames:
@@ -136,5 +141,5 @@ for sheet in wb.sheetnames:
                 cell.value = float(cell_value)
 
 # Save the modified Excel file
-wb.save(output_file)
-print(f"DataFrame has been written to {output_file}")
+wb.save(excel_output_file)
+print(f"DataFrame has been written to {excel_output_file}")
