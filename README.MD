@@ -41,8 +41,10 @@ This script is intended for users who have data in a .plt file format and need t
 
 ## File Structure
 
-    convert_plt_to_excel.py: The Python script for converting .plt files to Excel and CSV.
+    readtocsv.py: The Python script for converting .plt files to Excel and CSV.
+    readtocsv_mux.py: Python script with more detailed representation of plot file data with multi index columns along with max and min forces to enable smooth data visualization in the second sheet.
     test_6.plt: An example .plt file provided for testing the script.
+    test_6.csv: Example output file.
     README.MD: This documentation file.
 
 ## Running the Script
